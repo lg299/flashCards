@@ -6,7 +6,7 @@ describe("testing render translation input", () => {
     const result = render(< TranslationInput/>);
     const translationInput = result.container.querySelector('#standard-basic')
 
-    test("return input", () => {
+    test("return translationInput", () => {
         expect(translationInput).toBe
     })
 })
