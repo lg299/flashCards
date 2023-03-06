@@ -6,7 +6,13 @@ import TranslationInput from './components/translation-input/translation-input';
 function App() {
   return (
     <div className="App">
-      < Header />
+      <div>
+        < Header />
+      </div>
+      <div>
+        <TranslationInput />
+      </div>
+
     </div>
   );
 }
