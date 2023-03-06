@@ -1,44 +1,16 @@
-& label.Mui-focused {
+.MuiInputLabel-root,
+.MuiFormLabel-root.MuiInputLabel-root,
+.MuiFormLabel-root.MuiInputLabel-root.Mui-focused, 
+.MuiInput-underline:after {
     color: white;
 }
 
-& .MuiInput-underline:after {
-    border-bottom-color: white;
-}
-
-.MuiInputBase-root.MuiInput-root:hover {
+.MuiInputBase-root.MuiInput-root::before,
+.MuiInputBase-root.MuiInput-root:after,
+.MuiInputBase-root.MuiInput-root:hover,
+.MuiInputBase-input.MuiInput-input,
+.MuiInputBase-input.MuiInput-input {
     border-bottom: 2px solid white;
-    border-top: 0px;
-}
-
-.MuiInputBase-root.MuiInput-root::before {
-    border-bottom: 2px solid white;
-}
-
-.MuiInputBase-root.MuiInput-root:after {
-    border-bottom: 2px solid white;
-}
-
-& .MuiInputLabel-root {
     color: white;
-}
-  
-& .MuiOutlinedInput-input {
-    color: white;
-}
+}   
 
-& .MuiOutlinedInput-root {
-    & fieldset: {
-      borderColor: white;
-    },
-    &:hover fieldset: {
-      borderColor: white;
-    },
-    &.Mui-focused fieldset: {
-      borderColor: white;
-    }
-}
-
-#hello {
-    color: red;
-}

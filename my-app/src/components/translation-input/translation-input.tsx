@@ -13,32 +13,19 @@ const useStyles = makeStyles({
     }
 });
 
-const muiStyles = {
-    textField: {
-        color: 'white',
-        fontWeight: 'bold',
-    }
-}
-
 function TranslationInput() {
     const styles = useStyles();
 
     return (
         <div>
             <TextField
-                id="standard-basic"
+                id="standard"
                 label="Input translation"
                 variant="standard"
                 className={styles.textField}
-                InputProps={{
-                    style: muiStyles.textField,
-                }}
             // needs to be
             // InputProps= {{ style : {color: 'white'}}}
             />
-            <p id="hello">
-                hello
-            </p>
         </div>
     )
 }
