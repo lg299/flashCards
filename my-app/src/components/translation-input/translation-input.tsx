@@ -23,6 +23,7 @@ function TranslationInput() {
                 label="Input translation"
                 variant="standard"
                 className={styles.textField}
+
             // needs to be
             // InputProps= {{ style : {color: 'white'}}}
             />

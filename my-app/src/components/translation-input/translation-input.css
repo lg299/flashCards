@@ -6,11 +6,25 @@
 }
 
 .MuiInputBase-root.MuiInput-root::before,
-.MuiInputBase-root.MuiInput-root:after,
+.MuiInputBase-root.MuiInput-root::after,
 .MuiInputBase-root.MuiInput-root:hover,
-.MuiInputBase-input.MuiInput-input,
 .MuiInputBase-input.MuiInput-input {
     border-bottom: 2px solid white;
     color: white;
 }   
+
+.MuiInputBase-root.MuiInput-root:hover {
+    border: 0;
+}
+
+.MuiInputBase-root.MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
+    border: 0;   
+}
+
+
+
+/* .MuiInput-underline:hover {
+    border: 1px solid yellow;
+} doesn't work */
+
 
