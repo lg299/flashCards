@@ -6,6 +6,7 @@ const useStyles = makeStyles({
     color: "white",
     fontWeight: "bold",
     fontSize: "2rem",
+    paddingBottom: "2rem",
   },
 });
 
