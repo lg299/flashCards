@@ -42,7 +42,11 @@ const useStyles = makeStyles({
     }
 });
 
-function TranslationInput() {
+interface InputProps {
+    label: string 
+}
+
+function TranslationInput(props: InputProps) {
     const styles = useStyles();
 
     return (
@@ -50,7 +54,7 @@ function TranslationInput() {
             <Paper elevation={3} className={styles.paper} sx={{backgroundColor: 'rgb(188, 112, 163)'}}>
                 <TextField
                     id="standard"
-                    label="Input translation"
+                    label={props.label}
                     variant="standard"
                     className={styles.textField}
                 />

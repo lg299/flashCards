@@ -10,7 +10,7 @@ function App() {
         < Header />
       </div>
       <div>
-        <TranslationInput />
+        <TranslationInput label='Input Translation' />
       </div>
 
     </div>
