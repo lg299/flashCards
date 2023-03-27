@@ -4,20 +4,38 @@ import Header from './components/header/header'
 import TranslationInput from './components/translation-input/translation-input';
 import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
-import { makeStyles } from '@mui/styles';
+import { createStyles, WithStyles, withStyles } from '@mui/styles';
+import loadData from './utils/parse_csv'
 
-const useStyles = makeStyles({
+const styles = createStyles({
   arrow: {
     color: 'white',
     paddingTop: "1rem"
   }
 })
 
-function App() {
-  const styles = useStyles()
+interface AppProps extends WithStyles<typeof styles> {};
 
-  return (
-    <div className="App">
+interface AppState {
+  value: number;
+  data: any;
+};
+
+class App extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = {
+      value: 1,
+      data: loadData(),
+    };
+  }
+  
+  render() {
+    const { classes } = this.props;
+    const { value } = this.state;
+
+    return (
+      <div className="App">
       <div>
         < Header />
       </div>
@@ -31,7 +49,7 @@ function App() {
             />
           </Grid>
           <Grid item xs={2}>
-            <ArrowRightAltOutlinedIcon className={styles.arrow} />
+            <ArrowRightAltOutlinedIcon className={classes.arrow} />
           </Grid>
           <Grid item xs={2}>
             <TranslationInput
@@ -43,7 +61,9 @@ function App() {
         </Grid>
       </div>
     </div>
-  );
+    );
+  }
 }
 
-export default App;
+
+export default withStyles(styles)(App);
