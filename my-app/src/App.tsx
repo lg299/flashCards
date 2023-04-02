@@ -26,19 +26,21 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       value: 1,
-      data: loadData(),
+      data: loadData("data/example_csv.csv"),
     };
   }
   
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    const { value, data } = this.state;
+
 
     return (
       <div className="App">
       <div>
         < Header />
       </div>
+      <p>{data}</p>
       <div>
         <Grid container spacing={2}>
           <Grid item xs={3}></Grid>
