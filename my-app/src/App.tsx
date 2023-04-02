@@ -26,7 +26,7 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       value: 1,
-      data: loadData("data/example_csv.csv"),
+      data: 1,
     };
   }
   
@@ -40,7 +40,6 @@ class App extends React.Component<AppProps, AppState> {
       <div>
         < Header />
       </div>
-      <p>{data}</p>
       <div>
         <Grid container spacing={2}>
           <Grid item xs={3}></Grid>
