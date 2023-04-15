@@ -1,63 +1,50 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
+const borderStyling = {
+    borderBottom: '2px solid white',
+    color: 'white',
+}
 
-const useStyles = makeStyles({
-    textField: {
-        margin: '0 auto',
-        paddingBottom: 0,
-        marginTop: 0,
-        '& .Mui-disabled': {
-            color:'white !important'
-        },
-        '& .MuiFormLabel-root': {
+const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
+    margin: "0 auto",
+    paddingBottom: theme.spacing(1), 
+    marginTop: theme.spacing(1), 
+    '& .MuiFormLabel-root': {
+        color: 'white',
+        '&.Mui-focused': {
             color: 'white',
             fontWeight: 'bold',
-            '&.Mui-focused': {
-                color: 'white',
-            },
-        },
-        '& .MuiInput-root:before': {
-            borderBottom: '2px solid white',
-            color: 'white',
-        },
-        '& .MuiInput-root:after': {
-            borderBottom: '2px solid white',
-            color: 'white',
-        },
-        '& .MuiInput-input': {
-            borderBottom: '2px solid white',
-            color: 'white',
-        },
-        '& .MuiInput-underline:after': {
-            color: 'white',
-        },
-        '& .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before': {
-            border: '0',
         },
     },
-});
+    '& .MuiInput-root:before': borderStyling,
+    '& .MuiInput-root:after': borderStyling,
+    '& .MuiInput-input': borderStyling,
+    '& .MuiInput-underline:after': {
+        color: 'white',
+    },
+    '& .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before': {
+        border: '0',
+        color: 'white',
+    },  
+}));
 
-interface InputProps {
+interface TextFieldProps {
     label: string
     disabled: boolean
 }
 
-function TranslationInput(props: InputProps) {
-    const styles = useStyles();
 
+export function TranslationInput(props: TextFieldProps) {
+    const { label, disabled } = props;
     return (
-        <div>
-            <TextField
-                id="standard"
-                label={props.label}
-                variant="standard"
-                className={styles.textField}
-                disabled={props.disabled}
-            />
-        </div>
-    )
-}
-
-export default TranslationInput;
+        <StyledTextFeild
+            id="standard"
+            label={label}
+            variant="standard"
+            disabled={disabled}
+        />
+    );
+};

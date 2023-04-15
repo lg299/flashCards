@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Header from './components/header/header'
-import TranslationInput from './components/translation-input/translation-input';
+import { Header } from './components/header/header'
+import { TranslationInput } from './components/translation-input/translation-input';
 import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
