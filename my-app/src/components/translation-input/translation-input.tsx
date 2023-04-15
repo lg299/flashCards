@@ -34,7 +34,8 @@ interface TextFieldProps {
     label: string
 }
 
-const TranslationInput: React.FC<TextFieldProps> = (props) => {
+
+export function TranslationInput(props: TextFieldProps) {
     const { label } = props;
     return (
         <StyledTextFeild
@@ -44,6 +45,3 @@ const TranslationInput: React.FC<TextFieldProps> = (props) => {
         />
     );
 };
-
-
-export default TranslationInput;
