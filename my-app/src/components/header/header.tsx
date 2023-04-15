@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Header() {
+export function Header() {
   const styles = useStyles();
 
   return (
@@ -21,6 +21,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header
-
