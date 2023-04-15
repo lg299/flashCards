@@ -27,21 +27,24 @@ const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
     },
     '& .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before': {
         border: '0',
-    },
+        color: 'white',
+    },  
 }));
 
 interface TextFieldProps {
     label: string
+    disabled: boolean
 }
 
 
 export function TranslationInput(props: TextFieldProps) {
-    const { label } = props;
+    const { label, disabled } = props;
     return (
         <StyledTextFeild
             id="standard"
             label={label}
             variant="standard"
+            disabled={disabled}
         />
     );
 };
