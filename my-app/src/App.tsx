@@ -29,7 +29,7 @@ class App extends React.Component<AppProps, AppState> {
       data: 1,
     };
   }
-  
+
   render() {
     const { classes } = this.props;
     const { value, data } = this.state;
