@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 const borderStyling = {
@@ -27,7 +26,6 @@ const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
     },
     '& .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before': {
         border: '0',
-        color: 'white',
     },  
 }));
 
