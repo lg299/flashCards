@@ -1,12 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/header/header'
+import { Header } from './components/header/header'
+import { TranslationInput } from './components/translation-input/translation-input';
 
 function App() {
   return (
     <div className="App">
-      < Header/>
+      <div>
+        < Header />
+      </div>
+      <div>
+        <TranslationInput label='Input Translation' />
+      </div>
+
     </div>
   );
 }
