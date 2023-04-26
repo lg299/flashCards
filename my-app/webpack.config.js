@@ -15,6 +15,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.csv$/,
+        loader: 'file-loader',
+      },
+      {
         test: /\.(ts|tsx)$/,
         loader: "ts-loader",
       },
