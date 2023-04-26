@@ -8,7 +8,7 @@ interface fields {
     wordOrPhrase?: number
 }
 
-function loadData(filePath: string): { records: fields[] } {
+export function loadData(filePath: string): { records: fields[] } {
     const csvFilePath = path.resolve(__dirname, "..", filePath);
     console.log("filePath: ", csvFilePath)
 
@@ -34,5 +34,3 @@ function loadData(filePath: string): { records: fields[] } {
     parser.end();
     return {records}
 }
-
-export default loadData;
