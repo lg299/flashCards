@@ -4,7 +4,7 @@ import { TranslationInput } from './components/translation-input/translation-inp
 import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
-import { parse } from 'csv-parse';
+import { parse } from 'papaparse';
 
 
 const styles = createStyles({
@@ -24,7 +24,7 @@ interface AppProps extends WithStyles<typeof styles> {};
 
 interface AppState {
   value: number;
-  data: any;
+  data: fields[];
 };
 
 class App extends React.Component<AppProps, AppState> {
@@ -32,7 +32,12 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       value: 1,
-      data: 1,
+      data: [
+        {
+          spanish: "0", 
+          english: "0",
+        }
+      ],
     };
   }
 
@@ -41,44 +46,38 @@ class App extends React.Component<AppProps, AppState> {
         .then( response => response.text())
         .then( responseText => {
           const records: fields[] = []
+          const data = parse(responseText);
 
-          const parser = parse({
-            delimiter: '|'
-          });
-    
-          parser.on('readable', function () {
-              let record;
-              while ((record = parser.read()) !== null) {
-                  console.log('record: ', record)
-                  records.push({"spanish":record[1].slice(1,-1),
-                  "english":record[2].slice(1,-1),
-                    "wordOrPhrase": record[3].slice(1,-1)});
-              }
-          });
-      
-          parser.write(responseText)
-          parser.end();
-
-          this.setState({data: records})
+          console.log('respsonse text: ', data.data, typeof data.data)
+          for (var i = 0; i < data.data.length; i++) {
+            const data_ele = data.data[i] as any
+            records.push({
+              english: data_ele[1],
+              spanish: data_ele[2],
+            })
+        }
+        this.setState({data: records})
       })
   }
 
   render() {
+    console.log("-- Render --")
     const { classes } = this.props;
     const { value, data } = this.state;
+    const spanish = data[0].spanish
+    const english = data[0].english
 
     return (
       <div className="App">
       <div>
         < Header />
-        { data }
       </div>
       <div>
         <Grid container spacing={2}>
           <Grid item xs={3}></Grid>
           <Grid item xs={2}>
             <TranslationInput
-              label='Quiero una pizza'
+              label={spanish}
               disabled={true}
             />
           </Grid>
