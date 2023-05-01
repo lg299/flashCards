@@ -52,7 +52,7 @@ export function TranslationInput(props: TextFieldProps) {
             label={label}
             variant="standard"
             disabled={disabled}
-            onKeyDown={props.onKeyDown}
+            onKeyDown={onKeyDown}
         />
     );
 };

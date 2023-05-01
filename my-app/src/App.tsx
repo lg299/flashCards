@@ -5,7 +5,8 @@ import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import { parse } from 'papaparse';
-import { AnyARecord } from 'dns';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import Button from '@mui/material/Button';
 
 
 const styles = createStyles({
@@ -108,17 +109,19 @@ class App extends React.Component<AppProps, AppState> {
             <Grid item xs={3}></Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={5}></Grid>
             <Grid item xs={2}>
-
+              {this.state.isTranslationCorrect && <p style={{color: "white", fontWeight: "bold"}}>Yay :)</p>}
+   
+              <Button 
+               startIcon={<ArrowCircleRightIcon />}
+               color="secondary"
+               variant="text"
+               >
+                Next
+              </Button>
             </Grid>
-            <Grid item xs={2}>
-              {this.state.isTranslationCorrect && <p>Yay! :)</p>}
-            </Grid>
-            <Grid item xs={2}>
-
-            </Grid>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={5}></Grid>
           </Grid>
         </div>
       </div>
