@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import { parse } from 'papaparse';
+import { AnyARecord } from 'dns';
 
 
 const styles = createStyles({
@@ -14,16 +15,17 @@ const styles = createStyles({
   }
 })
 
-interface fields { 
+interface fields {
   spanish: string
   english: string
   wordOrPhrase?: number
 }
 
-interface AppProps extends WithStyles<typeof styles> {};
+interface AppProps extends WithStyles<typeof styles> { };
 
 interface AppState {
   value: number;
+  isTranslationCorrect: boolean;
   data: fields[];
 };
 
@@ -32,9 +34,10 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       value: 1,
+      isTranslationCorrect: false,
       data: [
         {
-          spanish: "0", 
+          spanish: "0",
           english: "0",
         }
       ],
@@ -42,22 +45,30 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   componentDidMount(): void {
-    fetch( './example_csv.csv' )
-        .then( response => response.text())
-        .then( responseText => {
-          const records: fields[] = []
-          const data = parse(responseText);
+    fetch('./example_csv.csv')
+      .then(response => response.text())
+      .then(responseText => {
+        const records: fields[] = []
+        const data = parse(responseText);
 
-          console.log('respsonse text: ', data.data, typeof data.data)
-          for (var i = 0; i < data.data.length; i++) {
-            const data_ele = data.data[i] as any
-            records.push({
-              english: data_ele[1],
-              spanish: data_ele[2],
-            })
+        for (var i = 0; i < data.data.length; i++) {
+          const data_ele = data.data[i] as string
+          records.push({
+            english: data_ele[1],
+            spanish: data_ele[2],
+          })
         }
-        this.setState({data: records})
+        this.setState({ data: records })
       })
+  }
+
+  checkTranslationIsCorrect = (e: any) => {
+    if (e.key == "Enter") {
+      const input = (document.getElementById("textfield-english") as HTMLInputElement).value
+      if (input == this.state.data[0].english.slice(1, -1)) {
+        this.setState({ isTranslationCorrect: true })
+      }
+    }
   }
 
   render() {
@@ -69,31 +80,48 @@ class App extends React.Component<AppProps, AppState> {
 
     return (
       <div className="App">
-      <div>
-        < Header />
+        <div>
+          < Header />
+        </div>
+        <div>
+          <Grid container spacing={2}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={2}>
+              <TranslationInput
+                label={spanish}
+                disabled={true}
+                onKeyDown={this.checkTranslationIsCorrect}
+                language="spanish"
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <ArrowRightAltOutlinedIcon className={classes.arrow} />
+            </Grid>
+            <Grid item xs={2}>
+              <TranslationInput
+                label='Input Translation'
+                disabled={false}
+                onKeyDown={this.checkTranslationIsCorrect}
+                language="english"
+              />
+            </Grid>
+            <Grid item xs={3}></Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={2}>
+
+            </Grid>
+            <Grid item xs={2}>
+              {this.state.isTranslationCorrect && <p>Yay! :)</p>}
+            </Grid>
+            <Grid item xs={2}>
+
+            </Grid>
+            <Grid item xs={3}></Grid>
+          </Grid>
+        </div>
       </div>
-      <div>
-        <Grid container spacing={2}>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={2}>
-            <TranslationInput
-              label={spanish}
-              disabled={true}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <ArrowRightAltOutlinedIcon className={classes.arrow} />
-          </Grid>
-          <Grid item xs={2}>
-            <TranslationInput
-              label='Input Translation'
-              disabled={false}
-            />
-          </Grid>
-          <Grid item xs={3}></Grid>
-        </Grid>
-      </div>
-    </div>
     );
   }
 }

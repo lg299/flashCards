@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 
 const borderStyling = {
@@ -10,8 +9,8 @@ const borderStyling = {
 
 const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
     margin: "0 auto",
-    paddingBottom: theme.spacing(1), 
-    marginTop: theme.spacing(1), 
+    paddingBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
     '& .MuiFormLabel-root': {
         color: 'white',
         '&.Mui-focused': {
@@ -28,23 +27,32 @@ const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
     '& .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before': {
         border: '0',
         color: 'white',
-    },  
+    },
 }));
 
 interface TextFieldProps {
     label: string
     disabled: boolean
+    language?: string
+    onKeyDown: any
 }
 
 
 export function TranslationInput(props: TextFieldProps) {
-    const { label, disabled } = props;
+    const { label,
+        disabled,
+        language,
+        onKeyDown
+    } = props;
+    const id = "textfield-" + language
+
     return (
         <StyledTextFeild
-            id="standard"
+            id={id}
             label={label}
             variant="standard"
             disabled={disabled}
+            onKeyDown={props.onKeyDown}
         />
     );
 };
