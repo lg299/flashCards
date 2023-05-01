@@ -28,6 +28,7 @@ interface AppState {
   value: number;
   isTranslationCorrect: boolean;
   data: fields[];
+  dataIndex: number;
 };
 
 class App extends React.Component<AppProps, AppState> {
@@ -42,6 +43,7 @@ class App extends React.Component<AppProps, AppState> {
           english: "0",
         }
       ],
+      dataIndex: 0,
     };
   }
 
@@ -66,18 +68,29 @@ class App extends React.Component<AppProps, AppState> {
   checkTranslationIsCorrect = (e: any) => {
     if (e.key == "Enter") {
       const input = (document.getElementById("textfield-english") as HTMLInputElement).value
-      if (input == this.state.data[0].english.slice(1, -1)) {
+      const correctValue = this.state.data[this.state.dataIndex].english.slice(1, -1)
+      console.log("input: ", input)
+      console.log("correct: ", correctValue)
+      if (input == correctValue) {
         this.setState({ isTranslationCorrect: true })
       }
     }
   }
 
+  nextTranslation = () => {
+    (document.getElementById("textfield-english") as HTMLInputElement).value = ""
+    this.setState({
+      dataIndex: this.state.dataIndex + 1,
+      isTranslationCorrect: false,
+    })
+  }
+
   render() {
     console.log("-- Render --")
     const { classes } = this.props;
-    const { value, data } = this.state;
-    const spanish = data[0].spanish
-    const english = data[0].english
+    const { value, data, dataIndex } = this.state;
+    const spanish = data[dataIndex].spanish
+    const english = data[dataIndex].english
 
     return (
       <div className="App">
@@ -117,6 +130,7 @@ class App extends React.Component<AppProps, AppState> {
                startIcon={<ArrowCircleRightIcon />}
                color="secondary"
                variant="text"
+               onClick={this.nextTranslation}
                >
                 Next
               </Button>
