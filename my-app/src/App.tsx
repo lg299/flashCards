@@ -7,6 +7,8 @@ import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import { parse } from 'papaparse';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from '@mui/material/Button';
+// @ts-ignore  
+import data from './data/example_csv.csv'
 
 
 const styles = createStyles({
@@ -48,21 +50,15 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   componentDidMount(): void {
-    fetch('./example_csv.csv')
-      .then(response => response.text())
-      .then(responseText => {
-        const records: fields[] = []
-        const data = parse(responseText);
-
-        for (var i = 0; i < data.data.length; i++) {
-          const data_ele = data.data[i] as string
-          records.push({
-            english: data_ele[1],
-            spanish: data_ele[2],
-          })
-        }
-        this.setState({ data: records })
+    const records: fields[] = []
+    for (var i = 0; i < data.length; i++) {
+      const data_ele = data[i] as string
+      records.push({
+        english: data_ele[1],
+        spanish: data_ele[2],
       })
+    }
+    this.setState({ data: records })
   }
 
   checkTranslationIsCorrect = (e: any) => {
