@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import loadData from './parse_csv';
+import { loadData } from './parse_csv';
 
 
 describe("testing parse csv reads file", () => {
