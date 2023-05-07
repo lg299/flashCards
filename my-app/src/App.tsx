@@ -63,7 +63,7 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ data: records })
   }
 
-  checkTranslationIsCorrect = (e: any) => {
+  checkTranslationIsCorrect = (e: KeyboardEvent) => {
     if (e.key == "Enter") {
       const input = (document.getElementById("textfield-english") as HTMLInputElement).value
       const correctValue = this.state.data[this.state.dataIndex].english
