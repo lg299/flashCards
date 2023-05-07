@@ -26,7 +26,7 @@ interface fields {
 interface AppProps extends WithStyles<typeof styles> { };
 
 interface AppState {
-  value: number;
+  enteredText: boolean;
   isTranslationCorrect: boolean;
   data: fields[];
   dataIndex: number;
@@ -36,7 +36,7 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      value: 1,
+      enteredText: false,
       isTranslationCorrect: false,
       data: [
         {
@@ -69,8 +69,16 @@ class App extends React.Component<AppProps, AppState> {
       console.log("input: ", input)
       console.log("correct: ", correctValue)
       if (input == correctValue) {
-        this.setState({ isTranslationCorrect: true })
+        this.setState({ 
+          isTranslationCorrect: true,
+          enteredText: true,
+         })
+         return 
       }
+      this.setState({ 
+        isTranslationCorrect: false,
+        enteredText: true,
+       })
     }
   }
 
@@ -80,21 +88,22 @@ class App extends React.Component<AppProps, AppState> {
       this.setState({
         dataIndex: 0,
         isTranslationCorrect: false,
+        enteredText: false,
       })
       return
     }
     this.setState({
       dataIndex: this.state.dataIndex + 1,
       isTranslationCorrect: false,
+      enteredText: false,
     })
   }
 
   render() {
     console.log("-- Render --")
     const { classes } = this.props;
-    const { value, data, dataIndex } = this.state;
+    const { enteredText, data, dataIndex } = this.state;
     const spanish = data[dataIndex].spanish
-    
     const english = data[dataIndex].english
 
     return (
@@ -129,8 +138,8 @@ class App extends React.Component<AppProps, AppState> {
           <Grid container spacing={2}>
             <Grid item xs={5}></Grid>
             <Grid item xs={2}>
-              {this.state.isTranslationCorrect && <p style={{color: "white", fontWeight: "bold"}}>Yay :)</p>}
-   
+              {this.state.isTranslationCorrect && <p style={{color: "white", fontWeight: "bold"}}>Yay!</p>}
+              {!this.state.isTranslationCorrect && this.state.enteredText && <p style={{color: "white", fontWeight: "bold"}}>Try again!</p>}
               <Button 
                startIcon={<ArrowCircleRightIcon />}
                color="secondary"
