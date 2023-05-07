@@ -33,7 +33,6 @@ interface AppState {
   isTranslationCorrect: boolean;
   data: fields[];
   dataIndex: number;
-  dataIndex: number;
 };
 
 class App extends React.Component<AppProps, AppState> {
@@ -49,7 +48,6 @@ class App extends React.Component<AppProps, AppState> {
         }
       ],
       dataIndex: 0,
-      dataIndex: 0,
     };
   }
 
@@ -58,8 +56,8 @@ class App extends React.Component<AppProps, AppState> {
     for (var i = 0; i < data.length; i++) {
       const data_ele = data[i] as string
       records.push({
-        english: data_ele[1],
-        spanish: data_ele[2],
+        english: data_ele[1].slice(1,-1),
+        spanish: data_ele[2].slice(1,-1),
       })
     }
     this.setState({ data: records })
