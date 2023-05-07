@@ -6,8 +6,7 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from '@mui/material/Button';
-// @ts-ignore  
-import data from './data/example_csv.csv'
+import data from './data/example_csv.csv';
 
 
 const styles = createStyles({
