@@ -6,14 +6,17 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from '@mui/material/Button';
-// @ts-ignore  
-import data from './data/example_csv.csv'
+import data from './data/example_csv.csv';
 
 
 const styles = createStyles({
   arrow: {
     color: 'white',
     paddingTop: "1rem"
+  }, 
+  translationStatus: {
+    color: "white",
+    fontWeight: "bold"
   }
 })
 
@@ -26,9 +29,10 @@ interface fields {
 interface AppProps extends WithStyles<typeof styles> { };
 
 interface AppState {
-  value: number;
+  enteredText: boolean;
   isTranslationCorrect: boolean;
   data: fields[];
+  dataIndex: number;
   dataIndex: number;
 };
 
@@ -36,7 +40,7 @@ class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      value: 1,
+      enteredText: false,
       isTranslationCorrect: false,
       data: [
         {
@@ -44,6 +48,7 @@ class App extends React.Component<AppProps, AppState> {
           english: "0",
         }
       ],
+      dataIndex: 0,
       dataIndex: 0,
     };
   }
@@ -60,30 +65,44 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ data: records })
   }
 
-  checkTranslationIsCorrect = (e: any) => {
+  checkTranslationIsCorrect = (e: KeyboardEvent) => {
     if (e.key == "Enter") {
       const input = (document.getElementById("textfield-english") as HTMLInputElement).value
-      const correctValue = this.state.data[this.state.dataIndex].english.slice(1, -1)
-      console.log("input: ", input)
-      console.log("correct: ", correctValue)
+      const correctValue = this.state.data[this.state.dataIndex].english
       if (input == correctValue) {
-        this.setState({ isTranslationCorrect: true })
+        this.setState({ 
+          isTranslationCorrect: true,
+          enteredText: true,
+         })
+         return 
       }
+      this.setState({ 
+        isTranslationCorrect: false,
+        enteredText: true,
+       })
     }
   }
 
   nextTranslation = () => {
     (document.getElementById("textfield-english") as HTMLInputElement).value = ""
+    if (this.state.dataIndex == this.state.data.length - 1){
+      this.setState({
+        dataIndex: 0,
+        isTranslationCorrect: false,
+        enteredText: false,
+      })
+      return
+    }
     this.setState({
       dataIndex: this.state.dataIndex + 1,
       isTranslationCorrect: false,
+      enteredText: false,
     })
   }
 
   render() {
-    console.log("-- Render --")
     const { classes } = this.props;
-    const { value, data, dataIndex } = this.state;
+    const { enteredText, data, dataIndex } = this.state;
     const spanish = data[dataIndex].spanish
     const english = data[dataIndex].english
 
@@ -119,8 +138,8 @@ class App extends React.Component<AppProps, AppState> {
           <Grid container spacing={2}>
             <Grid item xs={5}></Grid>
             <Grid item xs={2}>
-              {this.state.isTranslationCorrect && <p style={{color: "white", fontWeight: "bold"}}>Yay :)</p>}
-   
+              {this.state.isTranslationCorrect && <p className={classes.translationStatus}>Yay!</p>}
+              {!this.state.isTranslationCorrect && this.state.enteredText && <p className={classes.translationStatus}>Try again!</p>}
               <Button 
                startIcon={<ArrowCircleRightIcon />}
                color="secondary"
