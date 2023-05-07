@@ -13,6 +13,10 @@ const styles = createStyles({
   arrow: {
     color: 'white',
     paddingTop: "1rem"
+  }, 
+  translationStatus: {
+    color: "white",
+    fontWeight: "bold"
   }
 })
 
@@ -132,8 +136,8 @@ class App extends React.Component<AppProps, AppState> {
           <Grid container spacing={2}>
             <Grid item xs={5}></Grid>
             <Grid item xs={2}>
-              {this.state.isTranslationCorrect && <p style={{color: "white", fontWeight: "bold"}}>Yay!</p>}
-              {!this.state.isTranslationCorrect && this.state.enteredText && <p style={{color: "white", fontWeight: "bold"}}>Try again!</p>}
+              {this.state.isTranslationCorrect && <p className={classes.translationStatus}>Yay!</p>}
+              {!this.state.isTranslationCorrect && this.state.enteredText && <p className={classes.translationStatus}>Try again!</p>}
               <Button 
                startIcon={<ArrowCircleRightIcon />}
                color="secondary"
