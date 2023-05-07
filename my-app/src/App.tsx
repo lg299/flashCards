@@ -4,7 +4,6 @@ import { TranslationInput } from './components/translation-input/translation-inp
 import Grid from '@mui/material/Grid';
 import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
-import { parse } from 'papaparse';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from '@mui/material/Button';
 // @ts-ignore  
