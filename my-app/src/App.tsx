@@ -51,8 +51,6 @@ class App extends React.Component<AppProps, AppState> {
     const records: fields[] = []
     for (var i = 0; i < data.length; i++) {
       const data_ele = data[i] as string
-      console.log(`english: '${data_ele[1].slice(1,-1)}'`)
-      console.log(`spanish: '${data_ele[2].slice(1,-1)}'`)
       records.push({
         english: data_ele[1].slice(1,-1),
         spanish: data_ele[2].slice(1,-1),
@@ -65,8 +63,6 @@ class App extends React.Component<AppProps, AppState> {
     if (e.key == "Enter") {
       const input = (document.getElementById("textfield-english") as HTMLInputElement).value
       const correctValue = this.state.data[this.state.dataIndex].english
-      console.log("input: ", input)
-      console.log("correct: ", correctValue)
       if (input == correctValue) {
         this.setState({ 
           isTranslationCorrect: true,
@@ -99,7 +95,6 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    console.log("-- Render --")
     const { classes } = this.props;
     const { enteredText, data, dataIndex } = this.state;
     const spanish = data[dataIndex].spanish
