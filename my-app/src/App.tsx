@@ -6,6 +6,7 @@ import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined
 import { createStyles, WithStyles, withStyles } from '@mui/styles';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import Button from '@mui/material/Button';
+// @ts-ignore
 import data from './data/example_csv.csv';
 
 
@@ -54,10 +55,12 @@ class App extends React.Component<AppProps, AppState> {
   componentDidMount(): void {
     const records: fields[] = []
     for (var i = 0; i < data.length; i++) {
-      const data_ele = data[i] as string
+      if (!data[i][1]) {
+        return 
+      }
       records.push({
-        english: data_ele[1].slice(1,-1),
-        spanish: data_ele[2].slice(1,-1),
+        english: data[i][1].slice(1,-1),
+        spanish: data[i][2].slice(1,-1),
       })
     }
     this.setState({ data: records })
@@ -111,8 +114,8 @@ class App extends React.Component<AppProps, AppState> {
         </div>
         <div>
           <Grid container spacing={2}>
-            <Grid item xs={3}></Grid>
-            <Grid item xs={2}>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={3}>
               <TranslationInput
                 label={spanish}
                 disabled={true}
@@ -123,7 +126,7 @@ class App extends React.Component<AppProps, AppState> {
             <Grid item xs={2}>
               <ArrowRightAltOutlinedIcon className={classes.arrow} />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <TranslationInput
                 label='Input Translation'
                 disabled={false}
@@ -131,7 +134,7 @@ class App extends React.Component<AppProps, AppState> {
                 language="english"
               />
             </Grid>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={2}></Grid>
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={5}></Grid>
@@ -157,3 +160,4 @@ class App extends React.Component<AppProps, AppState> {
 
 
 export default withStyles(styles)(App);
+// export default App;

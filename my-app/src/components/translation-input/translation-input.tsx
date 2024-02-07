@@ -9,6 +9,7 @@ const borderStyling = {
 
 const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
     margin: "0 auto",
+    width: "80%",
     paddingBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
     '& .MuiFormLabel-root': {
@@ -17,6 +18,21 @@ const StyledTextFeild = styled(TextField)<TextFieldProps>(({ theme }) => ({
             color: 'white',
             fontWeight: 'bold',
         },
+    },
+    "& .MuiInputBase-root.Mui-disabled": {
+        color: "rgba(0, 125, 0, 0)" 
+    },
+    ".Mui-disabled": {
+        color: "green",
+    },
+    "& input.Mui-disabled": {
+        color: "green",
+        WebkitTextFillColor: "green",
+        opacity: 1
+    },
+    '.MuiInputBase-input-MuiInput-input:Mui-disabled': {
+        color: "green",
+        rgba: "0, 120, 0, 0"
     },
     '& .MuiInput-root:before': borderStyling,
     '& .MuiInput-root:after': borderStyling,

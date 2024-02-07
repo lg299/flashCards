@@ -1,12 +1,12 @@
 | me dijo | she/he told me |  |
-| vi | i saw |  |
-| vi que | i saw that |  |
-| vi que ella  | i saw that she |  |
+| vi | i saw | 0 |
+| vi que | i saw that | 1 |
+| vi que ella  | i saw that she | 1 |
 | vi que ella ya tenía | i saw that she already had | difference between tenía y tuvo |
 | le pregunté a Jana | i asked Jana | “I asked a question to Jana” therefore why not “lo pregunté a Jana” |
 | hacerse | to be made |  |
 | me mostró | she showed me  |  |
-| dorso | back |  |
+| dorso | back | 0 |
 | el dorso de su mano | back of her hand |  |
 | decírmelo | tell me | ew why |
 | no tuvo que decírmelo | you didn’t have to tell me |  |

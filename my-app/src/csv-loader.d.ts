@@ -1,8 +1,8 @@
-declare module "*.csv" {
-    export type GenericCsvItem = any;
-    type Csv<T> = Array<GenericCsvItem>
+// declare module "*.csv" {
+//     export type GenericCsvItem = any;
+//     type Csv<T> = Array<GenericCsvItem>
 
-    const Data = Csv<GenericCsvItem>
-    export default Data;
-}
+//     const Data = Csv<GenericCsvItem>
+//     export default Data;
+// }
 
